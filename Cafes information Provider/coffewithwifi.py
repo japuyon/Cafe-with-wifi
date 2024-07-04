@@ -1,4 +1,5 @@
 from flask import Flask,render_template,request
+from datetime import datetime
 boom=Flask(__name__)
 # the data of the cafes wil be here 👇
 my_list=[
@@ -12,9 +13,10 @@ my_list=[
         "Power":"🔌🔌🔌"
     }
 ]
+current_year=datetime.now().year
 @boom.route("/")
 def front():
-    return render_template("index.html")
+    return render_template("index.html",year=current_year)
 @boom.route("/the_cafes.html")
 def the_list_of_cafes():
     return render_template("the_cafes.html", my_list=my_list)
@@ -32,6 +34,7 @@ def to_add():
         "Wifi":request.form['Wifi'],
         "Power":request.form['Power']
     }
+    current_year=
     my_list.append(new_Cafe)
     return render_template("the_cafes.html", my_list=my_list)
 boom.run(debug=True)
